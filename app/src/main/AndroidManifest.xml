@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Promedium"
         tools:targetApi="31" >
         <activity
-            android:name=".NewNote"
+            android:name=".NewGrade"
             android:exported="false" />
         <activity
             android:name=".Course"
@@ -23,7 +23,7 @@
             android:name=".NewCourse"
             android:exported="false" />
         <activity
-            android:name=".SmestreActivity"
+            android:name=".SemestreActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

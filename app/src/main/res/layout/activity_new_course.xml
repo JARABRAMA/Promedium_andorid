@@ -55,7 +55,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv1"
-        tools:text="nombre de la materia" />
+        tools:text="name" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv2"
@@ -77,18 +77,19 @@
         android:background="@drawable/gray_rounded_borders"
         android:gravity="center"
         android:maxLines="1"
+        android:inputType="number"
         android:singleLine="true"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv2"
-        tools:text="creditos de la materia" />
+        tools:text="credits" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnNext"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/blue_rounded_borders"
+        android:background="@drawable/blue_circle"
         android:text="Siguiente"
         android:textAllCaps="false"
         android:textColor="@color/black"

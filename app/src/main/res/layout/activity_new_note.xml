@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray"
-    tools:context=".NewNote">
+    tools:context=".NewGrade">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
@@ -20,7 +20,7 @@
     <View
         android:id="@+id/viewGrade"
         android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_height="350dp"
         android:background="@drawable/pink_rounded_borders"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,6 +44,11 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:singleLine="true"
+        android:maxLines="1"
+        tools:text="Name"
+        android:gravity="center"
+        android:textColor="@color/white"
         android:background="@drawable/gray_rounded_borders"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,17 +70,7 @@
         app:layout_constraintTop_toBottomOf="@+id/etNameGrade" />
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/etPorcentGrade"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/gray_rounded_borders"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvNombreNota" />
-
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/edPorcentNota"
+        android:id="@+id/edPercentGrade"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -83,6 +78,9 @@
         android:inputType="numberDecimal"
         android:maxLines="1"
         android:singleLine="true"
+        tools:text="percent"
+        android:gravity="center"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvPorcentajeNota" />
@@ -97,14 +95,18 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edPorcentNota" />
+        app:layout_constraintTop_toBottomOf="@+id/edPercentGrade" />
 
     <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edQualificationGrade"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/gray_rounded_borders"
         android:inputType="numberDecimal"
+        tools:text="qualification"
+        android:gravity="center"
+        android:textColor="@color/white"
         android:maxLines="1"
         android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -112,6 +114,7 @@
         app:layout_constraintTop_toBottomOf="@+id/calificacionNota" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnNextGrade"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:background="@drawable/pink_circle"
