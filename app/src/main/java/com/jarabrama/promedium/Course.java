@@ -7,6 +7,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -36,7 +37,7 @@ public class Course extends AppCompatActivity {
 
         // Title
         AppCompatTextView tvTitle = findViewById(R.id.tvTile);
-        tvTitle.setText(materia.getNombre());
+        tvTitle.setText(Html.fromHtml(materia.getNombre()));
 
         // Average
         AppCompatTextView tvAverage = findViewById(R.id.tvAverage);
@@ -68,6 +69,16 @@ public class Course extends AppCompatActivity {
                 openNewGradeView.putExtra("semestre", semestre)
                         .putExtra("index", index);
                 startActivity(openNewGradeView);
+            }
+        });
+
+        AppCompatButton btnGoBack = findViewById(R.id.btnGoBack);
+        btnGoBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent openMainActivity = new Intent(Course.this, SemestreActivity.class);
+                openMainActivity.putExtra("semestre", semestre);
+                startActivity(openMainActivity);
             }
         });
 

@@ -20,12 +20,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <view class="androidx.appcompat.app.AlertController$RecycleListView"
+        app:layout_constraintVertical_weight="1"
         android:id="@+id/lvNames"
         android:layout_width="180dp"
+        android:maxHeight="25dp"
         android:layout_height="400dp"
         android:layout_marginStart="25dp"
         android:background="@drawable/gray_rounded_borders"
-        android:divider="@color/gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -36,7 +37,6 @@
         android:layout_height="400dp"
         android:layout_marginStart="10dp"
         android:background="@drawable/gray_rounded_borders"
-        android:divider="@color/gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/lvNames"
         app:layout_constraintTop_toTopOf="parent" />
@@ -47,14 +47,13 @@
         android:layout_height="400dp"
         android:layout_marginStart="10dp"
         android:background="@drawable/gray_rounded_borders"
-        android:divider="@color/gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/lvCredits"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnNewCourse"
-        android:layout_width="55dp"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="45dp"
         android:background="@drawable/blue_circle"
