@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "300607065987",
+    "project_id": "promedium-2be16",
+    "storage_bucket": "promedium-2be16.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:300607065987:android:2f1ad9e8d9e1c8ed2cb0b6",
+        "android_client_info": {
+          "package_name": "com.jarabrama.promedium"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAd42JmcV5xwNxZWzzoFnJ0LBlmypyav8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -18,8 +18,8 @@ public class Semestre implements Serializable {
 
     public Semestre() {
         this.limiteInferior = 0;
-        this.limiteSuperior = 5;
-        this.meta = 3;
+        this.limiteSuperior = 0;
+        this.meta = 0;
         ArrayList<Materia> materias = new ArrayList<>();
         this.materias =  materias;
     }
