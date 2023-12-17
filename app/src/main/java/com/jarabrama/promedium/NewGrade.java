@@ -3,13 +3,13 @@ package com.jarabrama.promedium;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
-import androidx.appcompat.widget.AppCompatTextView;
 
 import com.jarabrama.promedium.application.Promedium;
 import com.jarabrama.promedium.classes.Materia;
@@ -23,6 +23,7 @@ public class NewGrade extends AppCompatActivity {
     private boolean edit;
     private int position = -1;// the variable only will be used when the user
     //want to edit a grade
+    private int index = -1;
 
 
     @Override
@@ -33,8 +34,10 @@ public class NewGrade extends AppCompatActivity {
 
         Intent openNewGrade = getIntent();
         semestre = promedium.getSemestre();
-        int index = openNewGrade.getIntExtra("index", -1);
+        index = openNewGrade.getIntExtra("index", -1);
         edit = openNewGrade.getBooleanExtra("edit", false);
+        position = openNewGrade.getIntExtra("position", -1);
+
 
 
         edNameGrade = findViewById(R.id.etNameGrade);
@@ -43,44 +46,25 @@ public class NewGrade extends AppCompatActivity {
 
         AppCompatButton btnNext = findViewById(R.id.btnNextGrade);
 
-        if (edit) {
-            position = openNewGrade.getIntExtra("position", -1);
+        if (edit){ // fill the text edit spaces with the anterior dates
+            Nota grade = semestre.getMaterias().get(index)
+                    .getNotas().get(position); // this is the grade that we want to edit
 
-            AppCompatTextView title = findViewById(R.id.TitleNewGrade);
-            title.setText("Editar Nota");
-            // the title changes
-
-            Materia materia = semestre.getMaterias().get(index);
-            // the variable index indicates the position of the curse
-            Nota nota = materia.getNotas().get(position);
-            // the variable position indicates the index of the grade
-            edNameGrade.setText(nota.getNombre());
-            edPercentGrade.setText(String.valueOf(100 * nota.getPorcentaje()));
-            edQualificationGrade.setText(String.valueOf(nota.getCalificacion()));
-
+            edNameGrade.setText(grade.getNombre());
+            edPercentGrade.setText(String.valueOf(100 * grade.getPorcentaje()));
+            edQualificationGrade.setText(String.valueOf(grade.getCalificacion()));
         }
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    String name = String.valueOf(edNameGrade.getText());
-                    double percent = Double.parseDouble(String.valueOf(edPercentGrade.getText()));
-                    double qualification = Double.parseDouble(String.valueOf(edQualificationGrade.getText()));
-                    if (semestre.getMaterias().get(index).getSumaProcentaje() + percent > 100) {
-                        AlertDialog.Builder invalidPercent = new AlertDialog.Builder(NewGrade.this, R.style.AlertDialogPersonalizadoPink);
-                        invalidPercent.setCancelable(false)
-                                .setTitle("Porcentaje Inválido")
-                                .setMessage("La suma de los porcentajes supera el 100%")
-                                .setPositiveButton("Corregir", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        edPercentGrade.setText("");
-                                        dialog.dismiss();
-                                    }
-                                })
-                                .show();
-                    } else if (qualification > semestre.getLimiteSuperior() || qualification < semestre.getLimiteInferior()) {
+                    String inputName = String.valueOf(edNameGrade.getText()); // input name
+                    double inputPercent = Double.parseDouble(String.valueOf(edPercentGrade.getText())); // input percent
+                    double inputQualification = Double.parseDouble(String.valueOf(edQualificationGrade.getText())); // input qualification
+
+                    // qualification in the limits validation
+                    if (inputQualification > semestre.getLimiteSuperior() || inputQualification < semestre.getLimiteInferior()) {
                         AlertDialog.Builder invalidQualification = new AlertDialog.Builder(NewGrade.this, R.style.AlertDialogPersonalizadoPink);
                         invalidQualification.setCancelable(false)
                                 .setTitle("Califcación inválida")
@@ -93,30 +77,78 @@ public class NewGrade extends AppCompatActivity {
                                     }
                                 })
                                 .show();
-                    } else {
-                        if (edit) {
-                            semestre.getMaterias().get(index).getNotas()
-                                    .get(position).setNombre(name);
-                            // set the name
-                            semestre.getMaterias().get(index).getNotas()
-                                    .get(position).setPorcentaje(percent);
-                            // set the percent
-                            semestre.getMaterias().get(index).getNotas()
-                                    .get(position).setCalificacion(qualification);
-                            // set the qualification
+                    }
+
+                    if (edit) {
+                        Log.e("edit", "estas en la validacion correcta");
+                        Materia course = semestre.getMaterias().get(index);
+                        Nota grade = course.notas.get(position);
+                        // the variable grade is the grade to edit
+
+                        Double lastPercent = course.getSumaProcentaje(); //the percent before edit
+                        Double evaluatePercent = lastPercent - (grade.getPorcentaje() * 100); // the total percent without the percent of the grade to edit
+
+                        if (evaluatePercent + inputPercent > 100) {
+                            AlertDialog.Builder invalidPercent = new AlertDialog.Builder(NewGrade.this, R.style.AlertDialogPersonalizadoPink);
+                            invalidPercent.setCancelable(false)
+                                    .setTitle("Porcentaje Inválido")
+                                    .setMessage("La suma de los porcentajes supera el 100%")
+                                    .setPositiveButton("Corregir", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            edPercentGrade.setText("");
+                                            dialog.dismiss();
+                                        }
+                                    })
+                                    .show();
+                        } else {
+                            // set the new name
+                            semestre.getMaterias().get(index)
+                                    .getNotas().get(position)
+                                    .setNombre(inputName);
+
+                            //set the new percent
+                            semestre.getMaterias().get(index)
+                                    .getNotas().get(position)
+                                    .setPorcentaje(inputPercent);
+
+                            //set the new Qualification
+                            semestre.getMaterias().get(index)
+                                    .getNotas().get(position)
+                                    .setCalificacion(inputQualification);
+
+                            promedium.setSemestre(semestre); // saves the semestre
 
                             Intent openCourseView = new Intent(NewGrade.this, Course.class);
                             openCourseView.putExtra("index", index);
-                            promedium.setSemestre(semestre);
-                            startActivity(openCourseView);
+                            startActivity(openCourseView); // comeBack to Course view
+                        }
+
+                    } else {
+                        if (semestre.getMaterias().get(index).getSumaProcentaje() + inputPercent > 100) {
+                            AlertDialog.Builder invalidPercent = new AlertDialog.Builder(NewGrade.this, R.style.AlertDialogPersonalizadoPink);
+                            invalidPercent.setCancelable(false)
+                                    .setTitle("Porcentaje Inválido")
+                                    .setMessage("La suma de los porcentajes supera el 100%")
+                                    .setPositiveButton("Corregir", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            edPercentGrade.setText("");
+                                            dialog.dismiss();
+                                        }
+                                    })
+                                    .show();
                         } else {
-                            Nota newGrade = new Nota(name, percent, qualification);
+
+                            // creation of new grade
+                            Nota newGrade = new Nota(inputName, inputPercent, inputQualification);
                             semestre.getMaterias().get(index).getNotas().add(newGrade);
 
                             Intent openCourseView = new Intent(NewGrade.this, Course.class);
                             openCourseView.putExtra("index", index);
                             promedium.setSemestre(semestre);
                             startActivity(openCourseView);
+
                         }
                     }
                 } catch (IllegalArgumentException e) {

@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -37,7 +38,7 @@ public class SemestreActivity extends AppCompatActivity {
     Promedium promedium;
     ArrayAdapter<String> laNames, laCredits, laAverage;
     ArrayList<String> alNames, alCredits, alAverage;
-    AppCompatTextView tvCreditAverage;
+    AppCompatTextView tvCreditAverage, tvGoal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,11 +69,16 @@ public class SemestreActivity extends AppCompatActivity {
         this.lvCreditsCourse.setAdapter(laCredits);
         this.lvAverageCourse.setAdapter(laAverage);
 
+
+        // credit Average
         DecimalFormat treDigits = new DecimalFormat("#.###");
         tvCreditAverage = findViewById(R.id.tvAverage);
         String value = treDigits.format(semestre.getPromedioCredito());
-        tvCreditAverage.setGravity(com.google.android.material.R.id.center);
         tvCreditAverage.setText(value);
+
+        // Goal
+        tvGoal = findViewById(R.id.tvGoal);
+        tvGoal.setText(String.valueOf(semestre.getMeta()));
 
         this.btnNewCourse = findViewById(R.id.btnNewCourse);
         btnNewCourse.setOnClickListener(new View.OnClickListener() {

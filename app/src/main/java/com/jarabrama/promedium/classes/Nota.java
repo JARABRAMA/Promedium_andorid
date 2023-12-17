@@ -26,7 +26,7 @@ public class Nota implements Serializable {
     }
 
     public void setPorcentaje(double porcentaje) {
-        this.porcentaje = porcentaje;
+        this.porcentaje = porcentaje / 100;
     }
 
     public double getCalificacion() {

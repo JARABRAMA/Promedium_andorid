@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -34,8 +35,8 @@ public class Course extends AppCompatActivity {
     //this array list will contains the elements of the course
     ListView lvNames, lvPercent, lvQualification;
     //this ara the list view of the graphical view
-
     ArrayAdapter<String> aaNames, aaPercent, aaQualification;
+    AppCompatTextView Analisis;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +56,13 @@ public class Course extends AppCompatActivity {
         AppCompatTextView tvTitle = findViewById(R.id.tvTile);
         tvTitle.setText(Html.fromHtml(materia.getNombre()));
 
-        // Average
-        AppCompatTextView tvAverage = findViewById(R.id.tvAverage);
-        DecimalFormat treDigits = new DecimalFormat("#.###");
-        tvAverage.setText(treDigits.format(materia.getPromedio()));
-        tvAverage.setGravity(androidx.constraintlayout.widget.R.id.center);
+        // Analisis
+        DecimalFormat treeDigits = new DecimalFormat("#.###");
+        String analisis = "Tu promedio es de: ["+ String.valueOf(treeDigits.format(semestre.getMaterias().get(index).getPromedio())) + "]. " +getAnalisis(semestre, index);
+        Analisis = findViewById(R.id.tvAnalisis);
+        Analisis.setText(Html.fromHtml(analisis));
+
+
 
         // adapters and list
         alNames = new ArrayList<>();
@@ -147,6 +150,7 @@ public class Course extends AppCompatActivity {
         openNewGradeView.putExtra("index", index);
         openNewGradeView.putExtra("position", position);
 
+
         openNewGradeView.putExtra("edit", true);
         // indicate that the action is edit, no a new grade.
         startActivity(openNewGradeView);
@@ -169,6 +173,12 @@ public class Course extends AppCompatActivity {
         aaPercent.notifyDataSetChanged();
         aaQualification.notifyDataSetChanged();
         // notify the changes
+
+        // actualizar el analisis
+        DecimalFormat treeDigits = new DecimalFormat("#.###");
+        String analisis = "Tu promedio es de: ["+ String.valueOf(treeDigits.format(semestre.getMaterias().get(index).getPromedio())) + "]. " +getAnalisis(semestre, index);
+        Analisis = findViewById(R.id.tvAnalisis);
+        Analisis.setText(Html.fromHtml(analisis));
     }
 
     @Override
@@ -196,6 +206,44 @@ public class Course extends AppCompatActivity {
             date = String.valueOf(materia.getNotas().get(i).getCalificacion());
             alQualification.add(date);
         }
+    }
+    public String getAnalisis(Semestre semestre, int indexMateria) {
+        String analisis;
+        double notaFaltante;
+        String notaFaltanteString, porcentajeFaltante;
+
+        // nos aseguramos de trabajar con la misma materia que aparece en pantalla
+        Materia materia = semestre.getMaterias().get(indexMateria);
+        double promedio = materia.getPromedio();
+        double meta = semestre.getMeta();
+        double sumPorcentaje = 0;
+        for (int i = 0; i < materia.getNotas().size(); i++) {
+            sumPorcentaje += materia.getNotas().get(i).getPorcentaje();
+        }
+
+        if ((1 - sumPorcentaje) == 0 && (meta - promedio) == 0) {
+            analisis = "Felicitaciones has alcazado tu meta";
+        } else if ((1 - sumPorcentaje) > 0 && (meta - promedio) < 0) {
+            analisis = "WOW! alcanzate tu meta incluso antes del porcentaje total";
+        } else if ((1 - sumPorcentaje) == 0 && (meta - promedio) > 0) {
+            analisis = "Este semetre no fue posible alcanzar tu meta ¡pero el proximo lo conseguiremos, animos!";
+        } else if ((1 - sumPorcentaje) > 0 && ((meta - promedio) / (1 - sumPorcentaje)) > semestre.getLimiteSuperior()) {
+            analisis = "La nota que necesitas sacar se pasa del limite superior de calificacion, por lo tanto no sera posible"
+                    + " alcanzar tu meta";
+        } else if ((1 - sumPorcentaje) == 0) {
+            analisis = "Felicitaciones superaste tu meta";
+
+        } else {
+            DecimalFormat twoDigits = new DecimalFormat("#.##");
+            notaFaltante = (meta - promedio) / (1 - sumPorcentaje);
+            notaFaltanteString = String.valueOf(twoDigits.format(notaFaltante));
+            Double porcentajeFaltanteDouble = (1 - sumPorcentaje) * 100;
+            porcentajeFaltante = String.valueOf(twoDigits.format(porcentajeFaltanteDouble));
+            analisis = "Necesitas sacar una nota de " + notaFaltanteString
+                    + " con un porcentaje de " + porcentajeFaltante + "% para alcanzar tu meta de " + semestre.getMeta();
+        }
+
+        return analisis;
     }
 
     @Override

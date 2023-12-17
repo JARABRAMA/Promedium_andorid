@@ -5,4 +5,6 @@
     <color name="blue">#708194</color>
     <color name="pink">#947070</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="clearBlue">#C8D8E7</color>
+    <color name = "clearPink">#E7C8C8</color>
 </resources>

@@ -7,96 +7,137 @@
     android:background="@color/gray"
     tools:context=".Course">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvTile"
-        android:layout_width="290dp"
-        android:layout_height="50dp"
-        android:background="@drawable/pink_rounded_borders"
-        android:gravity="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/lvNamesGrades"
-        app:layout_constraintStart_toEndOf="@id/btnGoBack"
-        android:layout_marginStart="5dp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Logica y Representacion" />
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/pink_circle"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <view
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnGoBack"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginStart="25dp"
+            android:background="@color/pink"
+            android:outlineAmbientShadowColor="@color/pink"
+            android:outlineSpotShadowColor="@color/pink"
+            android:shadowColor="@color/gray"
+            android:text="←"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/lvNamesGrades" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/pink_circle"
+            android:gravity="center_vertical"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            tools:text="Logica y Representacion"
+            />
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <ListView
         android:id="@+id/lvNamesGrades"
-        class="androidx.appcompat.app.AlertController$RecycleListView"
         android:layout_width="180dp"
         android:layout_height="400dp"
-        android:layout_marginStart="25dp"
+        android:layout_marginStart="8dp"
         android:background="@drawable/gray_rounded_borders"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:divider="@color/gray"
+        app:layout_constraintBottom_toTopOf="@id/viewAnalisis"
+        app:layout_constraintEnd_toStartOf="@+id/lvPorcentGrades"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar" />
 
-    <view
+    <ListView
         android:id="@+id/lvPorcentGrades"
-        class="androidx.appcompat.app.AlertController$RecycleListView"
         android:layout_width="70dp"
         android:layout_height="400dp"
-        android:layout_marginStart="10dp"
         android:background="@drawable/gray_rounded_borders"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:divider="@color/gray"
+        app:layout_constraintBottom_toTopOf="@id/viewAnalisis"
+        app:layout_constraintEnd_toStartOf="@+id/lvQualificationGrade"
         app:layout_constraintStart_toEndOf="@id/lvNamesGrades"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar" />
 
-    <view
+    <ListView
         android:id="@+id/lvQualificationGrade"
-        class="androidx.appcompat.app.AlertController$RecycleListView"
         android:layout_width="70dp"
         android:layout_height="400dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/gray_rounded_borders"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:divider="@color/gray"
+        app:layout_constraintBottom_toTopOf="@id/viewAnalisis"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/lvPorcentGrades"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar" />
+
+    <View
+        android:id="@+id/viewAnalisis"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@drawable/pink_superior_rounded_borders"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        ></View>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvAnalisis"
+        android:layout_width="350dp"
+        android:layout_height="125dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvAnalisisTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="este es una pequeña muestra de lo que podria ser una analisis"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        />
+    <TextView
+        android:id="@+id/tvAnalisisTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Analisis"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@id/viewAnalisis"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnNewGrade"
         android:layout_width="49dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:background="@drawable/pink_circle"
+        android:background="@drawable/clear_pink_circle"
+        android:textStyle="bold"
+        android:textSize="18sp"
         android:text="+"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/tvAnalisis"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lvNamesGrades" />
+       app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/promediumGrade"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:text="Promedio"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnNewGrade"
-        app:layout_constraintTop_toBottomOf="@+id/lvPorcentGrades" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvAverage"
-        android:layout_width="80dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="10dp"
-        android:background="@drawable/gray_rounded_borders"
-        android:gravity="center"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/promediumGrade"
-        app:layout_constraintTop_toBottomOf="@+id/lvPorcentGrades"
-        tools:text="4.23" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnGoBack"
-        android:layout_width="49dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:background="@drawable/pink_circle"
-        android:text="←"
-        app:layout_constraintBottom_toTopOf="@+id/lvNamesGrades"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
