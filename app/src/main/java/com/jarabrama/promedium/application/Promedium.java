@@ -76,4 +76,10 @@ public class Promedium extends Application {
     public void setSemestre(Semestre semestre) {
         this.semestre = semestre;
     }
+
+    public String removeDecimal(String number) { // esta fincion quitara el .0 de los numeros enteros de formato double
+        if (number.endsWith(".0")){
+            return number.replace(".0", "");
+        } else return number;
+    }
 }

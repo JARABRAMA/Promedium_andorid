@@ -9,14 +9,13 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_width="0.dp"
+        android:layout_height="0.dp"
+        android:layout_margin="8dp"
         android:background="@drawable/blue_circle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline_vertical4"
+        app:layout_constraintStart_toStartOf="@id/guideline_vertical1"
+        app:layout_constraintBottom_toTopOf="@id/guideline_top"
         app:layout_constraintTop_toTopOf="parent"
         app:title="@string/app_name"
         app:titleTextColor="@color/black"
@@ -25,12 +24,12 @@
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/btnSettings"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_gravity="right"
-            android:layout_marginEnd="10dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/blue_rounded_borders"
-            android:foreground="@drawable/setting"
+            android:foreground="@drawable/rounded_settings"
             app:layout_constraintBottom_toTopOf="@+id/tvTitle"
             app:layout_constraintEnd_toStartOf="@id/tvTitle"
             app:layout_constraintStart_toStartOf="parent"
@@ -42,74 +41,77 @@
     <ListView
         android:id="@+id/lvNames"
         class="androidx.appcompat.app.AlertController$RecycleListView"
-        android:layout_width="180dp"
-        android:layout_height="400dp"
+        android:layout_width="0.dp"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
         android:layout_marginStart="8dp"
         android:background="@drawable/gray_rounded_borders"
         android:divider="@color/gray"
         android:maxHeight="25dp"
-        app:layout_constraintBottom_toTopOf="@id/semestreDataView"
-        app:layout_constraintEnd_toStartOf="@+id/lvCredits"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/my_toolbar"
+        app:layout_constraintBottom_toTopOf="@id/guideline_bottom"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical2"
+        app:layout_constraintStart_toStartOf="@id/guideline_vertical1"
+        app:layout_constraintTop_toBottomOf="@id/guideline_top"
         app:layout_constraintVertical_weight="1" />
 
     <ListView
         android:id="@+id/lvCredits"
-        android:layout_width="70dp"
-        android:layout_height="400dp"
+        android:layout_margin="8dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="@drawable/gray_rounded_borders"
         android:divider="@color/gray"
-        app:layout_constraintBottom_toTopOf="@id/semestreDataView"
-        app:layout_constraintEnd_toStartOf="@+id/lvAverage"
-        app:layout_constraintStart_toEndOf="@id/lvNames"
-        app:layout_constraintTop_toBottomOf="@id/my_toolbar"
-        />
+        app:layout_constraintBottom_toTopOf="@id/guideline_bottom"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical3"
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical2"
+        app:layout_constraintTop_toBottomOf="@id/guideline_top" />
 
     <ListView
         android:id="@+id/lvAverage"
-        android:layout_width="70dp"
-        android:layout_height="400dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
         android:background="@drawable/gray_rounded_borders"
         android:divider="@color/gray"
-        app:layout_constraintBottom_toTopOf="@id/semestreDataView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/lvCredits"
-        app:layout_constraintTop_toBottomOf="@id/my_toolbar"
-        />
+        app:layout_constraintBottom_toTopOf="@id/guideline_bottom"
+        app:layout_constraintEnd_toEndOf="@id/guideline_vertical4"
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical3"
+        app:layout_constraintTop_toBottomOf="@id/guideline_top" />
 
     <View
         android:id="@+id/semestreDataView"
-        android:layout_width="wrap_content"
-        android:layout_height="300dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/blue_superior_rounded_borders"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/blue_superior_rounded_borders"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideline_bottom" />
 
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnNewCourse"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:background="@drawable/clear_blue_circle"
-        android:text="+"
+        android:foreground="@drawable/rounded_add_24"
         android:textColor="@color/black"
-        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvGoal" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvGoal">
+
+    </androidx.appcompat.widget.AppCompatButton>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvPromedio"
         android:layout_width="100dp"
         android:layout_height="25dp"
         android:text="Promedio"
-        android:textSize="18sp"
         android:textColor="@color/black"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@id/tvMeta"
         app:layout_constraintEnd_toStartOf="@+id/tvAverage"
         app:layout_constraintStart_toStartOf="parent"
@@ -133,27 +135,68 @@
         android:layout_width="100dp"
         android:layout_height="25dp"
         android:text="Meta"
-        android:textSize="18sp"
         android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/tvGoal"
-        app:layout_constraintTop_toBottomOf="@id/tvAverage"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/btnNewCourse"
-        />
+        app:layout_constraintEnd_toStartOf="@id/tvGoal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvAverage" />
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvGoal"
         android:layout_width="80dp"
         android:layout_height="43dp"
-        app:layout_constraintStart_toEndOf="@id/tvMeta"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvAverage"
         android:background="@drawable/gray_rounded_borders"
-        app:layout_constraintBottom_toTopOf="@+id/btnNewCourse"
-        android:textSize="18sp"
-        tools:text="4"
         android:gravity="center"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnNewCourse"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvMeta"
+        app:layout_constraintTop_toBottomOf="@+id/tvAverage"
+        tools:text="4"
 
         />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.62" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_vertical1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.03" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_vertical2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.53" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_vertical3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.75" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_vertical4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.97" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
