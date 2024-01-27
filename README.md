@@ -1,7 +1,7 @@
 Hola soy Brayan Jaraba estudiante de ingenieria de sistemas 
 este es mi primer proyecto, se trata de una app android la cual teine como proposito facilitar el proceso de calculo de los promedio de tus materias
 
-este el enlace para la descarga de la aplicación --> https://drive.google.com/file/d/1ywiZfRqOaJL3aPfYoVLpa3riy_0baLVP/view?usp=sharing
+este el enlace para la descarga de la aplicación --> https://drive.google.com/file/d/1qPmV-UB1kznAnWSpWmlxoXObS3OZzNBR/view?usp=sharing
 (Es probable que te pida una veriicacion esxtra porque la app no esta verificada por play protect, y es que pro el momento no tengo cuenta de desarrollador de google)
 
 estas son unas de las imagenes que describen un poco de mi aplicacion
