@@ -4,18 +4,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
-import androidx.preference.PreferenceFragmentCompat;
-
 import com.jarabrama.promedium.application.Promedium;
 import com.jarabrama.promedium.classes.Semestre;
 
-import java.text.DecimalFormat;
 
 public class SettingsActivity extends AppCompatActivity {
     Semestre semestre;
@@ -39,15 +34,17 @@ public class SettingsActivity extends AppCompatActivity {
         edGoal = findViewById(R.id.edGoal);
         btnSave = findViewById(R.id.btnSave);
 
-        edGoal.setText(String.valueOf(semestre.getMeta()));
-        edInferiorLimit.setText(String.valueOf(semestre.getLimiteInferior()));
-        edSuperiorLimit.setText(String.valueOf(semestre.getLimiteSuperior()));
+        edGoal.setText(promedium.removeDecimal(String.valueOf(semestre.getMeta())));
+        edInferiorLimit.setText(promedium.removeDecimal(String.valueOf(semestre.getLimiteInferior())));
+        edSuperiorLimit.setText(promedium.removeDecimal(String.valueOf(semestre.getLimiteSuperior())));
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
                     double inferiorLimit = Double.parseDouble(String.valueOf(edInferiorLimit.getText()));
+
+
                     double superiorLimit = Double.parseDouble(String.valueOf(edSuperiorLimit.getText()));
                     double goal = Double.parseDouble(String.valueOf(edGoal.getText()));
                     if (superiorLimit > 0 && goal > 0){

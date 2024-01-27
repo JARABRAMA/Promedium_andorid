@@ -74,11 +74,11 @@ public class SemestreActivity extends AppCompatActivity {
         DecimalFormat treDigits = new DecimalFormat("#.###");
         tvCreditAverage = findViewById(R.id.tvAverage);
         String value = treDigits.format(semestre.getPromedioCredito());
-        tvCreditAverage.setText(value);
+        tvCreditAverage.setText(promedium.removeDecimal(value));
 
         // Goal
         tvGoal = findViewById(R.id.tvGoal);
-        tvGoal.setText(String.valueOf(semestre.getMeta()));
+        tvGoal.setText(promedium.removeDecimal(String.valueOf(semestre.getMeta())));
 
         this.btnNewCourse = findViewById(R.id.btnNewCourse);
         btnNewCourse.setOnClickListener(new View.OnClickListener() {
@@ -149,7 +149,7 @@ public class SemestreActivity extends AppCompatActivity {
 
             //average
             date = formatTwoDigits(semestre.getMaterias().get(i).getPromedio());
-            alAverage.add(date);
+            alAverage.add(promedium.removeDecimal(date));
         }
     }
 

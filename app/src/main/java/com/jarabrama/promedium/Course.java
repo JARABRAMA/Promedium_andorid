@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
-import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -58,10 +57,9 @@ public class Course extends AppCompatActivity {
 
         // Analisis
         DecimalFormat treeDigits = new DecimalFormat("#.###");
-        String analisis = "Tu promedio es de: ["+ String.valueOf(treeDigits.format(semestre.getMaterias().get(index).getPromedio())) + "]. " +getAnalisis(semestre, index);
+        String analisis = "Tu promedio es de: [" + String.valueOf(treeDigits.format(semestre.getMaterias().get(index).getPromedio())) + "]. " + getAnalisis(semestre, index);
         Analisis = findViewById(R.id.tvAnalisis);
         Analisis.setText(Html.fromHtml(analisis));
-
 
 
         // adapters and list
@@ -176,7 +174,7 @@ public class Course extends AppCompatActivity {
 
         // actualizar el analisis
         DecimalFormat treeDigits = new DecimalFormat("#.###");
-        String analisis = "Tu promedio es de: ["+ String.valueOf(treeDigits.format(semestre.getMaterias().get(index).getPromedio())) + "]. " +getAnalisis(semestre, index);
+        String analisis = "Tu promedio es de: [" + String.valueOf(treeDigits.format(semestre.getMaterias().get(index).getPromedio())) + "]. " + getAnalisis(semestre, index);
         Analisis = findViewById(R.id.tvAnalisis);
         Analisis.setText(Html.fromHtml(analisis));
     }
@@ -200,13 +198,14 @@ public class Course extends AppCompatActivity {
 
             // Percent
             date = String.valueOf(100 * materia.getNotas().get(i).getPorcentaje());
-            alPercent.add(date);
+            alPercent.add(promedium.removeDecimal(date));
 
             // Qualification
             date = String.valueOf(materia.getNotas().get(i).getCalificacion());
-            alQualification.add(date);
+            alQualification.add(promedium.removeDecimal(date));
         }
     }
+
     public String getAnalisis(Semestre semestre, int indexMateria) {
         String analisis;
         double notaFaltante;
@@ -236,11 +235,13 @@ public class Course extends AppCompatActivity {
         } else {
             DecimalFormat twoDigits = new DecimalFormat("#.##");
             notaFaltante = (meta - promedio) / (1 - sumPorcentaje);
-            notaFaltanteString = String.valueOf(twoDigits.format(notaFaltante));
+            notaFaltanteString = twoDigits.format(notaFaltante);
             Double porcentajeFaltanteDouble = (1 - sumPorcentaje) * 100;
             porcentajeFaltante = String.valueOf(twoDigits.format(porcentajeFaltanteDouble));
-            analisis = "Necesitas sacar una nota de " + notaFaltanteString
-                    + " con un porcentaje de " + porcentajeFaltante + "% para alcanzar tu meta de " + semestre.getMeta();
+
+            analisis = "Necesitas sacar una nota de " + promedium.removeDecimal(notaFaltanteString)
+                    + " con un porcentaje de " + promedium.removeDecimal(porcentajeFaltante) + "% para alcanzar tu meta de " +
+                    promedium.removeDecimal(String.valueOf(semestre.getMeta()));
         }
 
         return analisis;
